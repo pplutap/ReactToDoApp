@@ -26,5 +26,13 @@ describe('ToDoList', () => {
         expect(todosComponents.length).toBe(todos.length);
     });
 
+    it('should render empty message if not todos', () => {
+        var todos = [];
+        var todoList = TextUtils.renderIntoDocument(<ToDoList todos={todos}/>);
+        var $el = $(ReactDOM.findDOMNode(todoList));
+
+        expect($el.find('.container__message').length).toBe(1);
+    });
+
 
 });
