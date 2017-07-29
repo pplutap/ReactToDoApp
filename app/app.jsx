@@ -6,10 +6,16 @@ var {Route, Router, IndexRoute, hashHistory} = require('react-router');
 var ToDoApp = require('ToDoApp');
 var actions = require('actions');
 var store = require('configureStore').configure();
+var ToDoApi = require('ToDoApi');
 
 store.subscribe(() => {
-    console.log('New state', store.getState());
+    var state = store.getState();
+    console.log('New state', state);
+    ToDoApi.setToDos(state.todos);
 });
+
+var initialTodos = ToDoApi.getToDos();
+store.dispatch(actions.addTodos(initialTodos));
 
 $(document).foundation();
 
