@@ -3,9 +3,11 @@ var ReactDOM = require('react-dom');
 var expect = require('expect');
 var $ = require('jQuery');
 var TextUtils = require('react-addons-test-utils');
+var {Provider} = require('react-redux');
 
-var ToDoList = require('ToDoList');
-var ToDo = require('ToDo');
+import {configure} from 'configureStore';
+import ConnectedTodoList, {ToDoList} from 'ToDoList';
+import ConnectedTodo, {ToDo} from 'ToDo';
 
 describe('ToDoList', () => {
     it('should exists', () => {
@@ -15,13 +17,27 @@ describe('ToDoList', () => {
     it('should render one ToDo component for each todo item', () => {
         var todos = [{
             id: 1,
-            text: 'Do something'
+            text: 'Do something',
+            completed: false,
+            completedAt: undefined,
+            createdAt: 500
         }, {
             id: 2,
-            text: 'Check all'
+            text: 'Check all',
+            completed: false,
+            completedAt: undefined,
+            createdAt: 500
         }];
-        var todoList = TextUtils.renderIntoDocument(<ToDoList todos={todos}/>);
-        var todosComponents = TextUtils.scryRenderedComponentsWithType(todoList, ToDo);
+        var store = configure({
+            todos
+        });
+        var provider = TextUtils.renderIntoDocument(
+            <Provider store={store}>
+                <ConnectedTodoList/>
+            </Provider>
+        );
+        var todoList = TextUtils.scryRenderedComponentsWithType(provider, ConnectedTodoList)[0];
+        var todosComponents = TextUtils.scryRenderedComponentsWithType(todoList, ConnectedTodo);
 
         expect(todosComponents.length).toBe(todos.length);
     });
