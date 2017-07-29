@@ -11,10 +11,6 @@ store.subscribe(() => {
     console.log('New state', store.getState());
 });
 
-store.dispatch(actions.addTodo('Clean the year'));
-store.dispatch(actions.setSearchText('yard'));
-store.dispatch(actions.toggleShowCompleted());
-
 $(document).foundation();
 
 require('style!css!sass!applicationStyles');

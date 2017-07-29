@@ -6,7 +6,7 @@ var TextUtils = require('react-addons-test-utils');
 var {Provider} = require('react-redux');
 
 var configureStore = require('configureStore');
-import ToDoList from 'ToDoList';
+import {ToDoList} from 'ToDoList';
 var ToDoApp = require('ToDoApp');
 
 describe('ToDoApp', () => {
