@@ -9,7 +9,6 @@ try {
         storageBucket: process.env.STORAGE_BUCKET,
         messagingSenderId: "417721990920"
     };
-    console.log("API_KEY", config.databaseURL);
     firebase.initializeApp(config);
 } catch (e) {
     console.log(e.message);
