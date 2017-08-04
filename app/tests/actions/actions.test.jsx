@@ -141,5 +141,22 @@ describe('Actions', () => {
               done();
           }, done);
        });
-   })
+   });
+
+   it('should generate login actions with user uid', () => {
+       var action = {
+           type: 'LOGIN',
+           uid: 123
+       };
+       var res = actions.login(action.uid);
+       expect(res).toEqual(action);
+   });
+
+   it('should generate logout action', () => {
+      var action = {
+          type: 'LOGOUT'
+      };
+      var res = actions.logout();
+      expect(res).toEqual(action);
+   });
 });
